@@ -1,0 +1,146 @@
+<%- include("./globals/head") %>
+
+  <style>
+    .add-enq {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .edit-enq {
+      background-color: yellowgreen;
+      border: none;
+      height: 35px;
+      width: 35px;
+      border-radius: 5px;
+    }
+
+    .delete-enq {
+      background-color: red;
+      border: none;
+      height: 35px;
+      width: 35px;
+      border-radius: 5px;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12   mt-5 d-flex justify-content-between ">
+          <h1>Logis Leads</h1>
+          <button class="add-enq bg-primary " data-bs-toggle="modal" data-bs-target="#exampleModal"> <i
+              class="fa-solid fa-plus" style="color: white;"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <!-- <th scope="col">#</th> -->
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Message</th>
+              <th scope="col">Status</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="forms-lists">
+
+            <% allforms.forEach((form)=> { %>
+              <tr id="form-<%= form.id %>">
+
+                <!-- <th scope="row">1</th> -->
+                <td><%- form.name %></td>
+                <td><%- form.email %></td>
+                <td><%- form.mobile %></td>
+                <td><%- form.subject %></td>
+                <td><%- form.message %></td>
+                <td><%- form.Status %></td>
+                <td>
+                  <button class="edit-enq" id="edit-form" data-url="/read/form?id=<%= form.id %>" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"><i class="fa-solid fa-pencil  "></i>
+                  </button>
+                  <button class="delete-enq ms-4 " data-url="/delete/form?id=<%= form.id %>" id="delete-btn"><i class="fa-solid fa-trash" style="color: white;"></i></button>
+                </td>
+
+
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title form-head fs-5" id="exampleModalLabel">Create Lead</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="contact-form" action="/create">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder="Enter Name">
+
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="exampleInputPassword1"
+                  placeholder="Enter Email">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Mobile</label>
+                <input type="number" name="mobile" class="form-control" id="exampleInputPassword1"
+                  placeholder="Enter Mobile">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Subject</label>
+                <input type="text" name="subject" class="form-control" id="exampleInputPassword1"
+                  placeholder="Enter Subject">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Message</label>
+                <input type="text" name="message" class="form-control" id="exampleInputPassword1"
+                  placeholder="Enter Message">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Status</label>
+                <select name="" id="" class="form-control">
+                  <option value="">--Select--</option>
+                  <option class="text-success"> Active </option>
+                  <option class="text-danger"> Inactive </option>
+
+                </select>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <%- include("./globals/script") %>
+  </body>
+
+  </html>
